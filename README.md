@@ -7,3 +7,5 @@ implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
 <br/>
 reply-text=ACCESS_REFUSED - access to exchange 'amq.default' in vhost
+<br/>
+https://www.rabbitmq.com/access-control.html  search ACCESS_REFUSED here
