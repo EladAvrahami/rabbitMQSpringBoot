@@ -15,6 +15,7 @@ https://stackoverflow.com/questions/54269896/rabbitmq-config-queues-listener-in-
 https://societe-generale.github.io/rabbitmq-advanced-spring-boot-starter/#rabbitmq-auto-configuration - auto-configuration ymal
 
 
+## Below is the sample rabbitmq auto configuration.
 <pre>
 rabbitmq:
   auto-config:
