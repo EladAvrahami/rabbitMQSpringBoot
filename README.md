@@ -92,3 +92,121 @@ rabbitmq:
         routing-key: rkey-mock
 
 </pre>
+
+
+### person:
+<pre>
+
+package com.poalim.rabbitmqintegration.impl;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.io.Serializable;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class Person implements Serializable {
+    private String idPerson;
+    private String namePerson;
+
+
+    @Override
+    public String toString() {
+        return "Person {" +
+            "idPerson='" + idPerson + '\'' +
+            ", namePerson='" + namePerson + '\'' +
+            '}';
+    }
+}
+
+</pre>
+
+
+### ProduceController :
+<pre>
+package com.poalim.rabbitmqintegration.impl;
+
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1")
+public class ProduceController {
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+
+    @RequestMapping(value = "/send-message", method = RequestMethod.POST)
+    public String sendMessage(@RequestBody Person person) {
+        rabbitTemplate.convertAndSend("tester.exchange", "", person);
+        System.out.println(person);
+        return "Send message to RabbitMQ successfully completed";
+    }
+
+}
+
+</pre>
+
+### consumer
+<pre>
+package com.poalim.rabbitmqintegration.impl;
+
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Service;
+
+
+@Service
+@EnableRabbit
+public class RabbitMQConsumer {
+
+
+    @RabbitListener(queues = "test.queue")
+    public void getMessage(Person person) {
+        System.out.println("RabbitListener-getMessage:" + person);
+
+    }
+}
+</pre>
+
+### app ymal
+<pre>
+# Place any custom environment variables relevant for the all environments
+#https://www.baeldung.com/spring-boot-yaml-vs-properties -explanation yaml file
+#https://github.com/EladAvrahami/rabbitMQSpringBoot/blob/main/README.md - rabbitmq auto configuration
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: TST10108AD01
+    password: Tpq2QSerkGb0Kjc
+    virtual-host: RabbitWrapperDevMain
+
+</pre>
+
+### curl
+<pre>
+curl -X POST
+http://localhost:8080/api/v1/send-message
+-H 'Accept: /'
+-H 'Accept-Encoding: gzip, deflate'
+-H 'Cache-Control: no-cache'
+-H 'Connection: keep-alive'
+-H 'Content-Length: 51'
+-H 'Content-Type: application/json'
+-H 'Host: localhost:8080'
+-H 'User-Agent: PostmanRuntime/7.15.2'
+-H 'cache-control: no-cache'
+-d '{ "idPerson": "ronen", "namePerson": "12345678" }'
+</pre>
+
+
+
