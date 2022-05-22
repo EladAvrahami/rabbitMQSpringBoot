@@ -13,6 +13,8 @@ https://www.rabbitmq.com/access-control.html - search ACCESS_REFUSED here
 https://stackoverflow.com/questions/54269896/rabbitmq-config-queues-listener-in-yaml-file - ymal config to rabbit
 <br/>
 https://societe-generale.github.io/rabbitmq-advanced-spring-boot-starter/#rabbitmq-auto-configuration - auto-configuration ymal
+<br/>
+https://www.baeldung.com/spring-boot-yaml-vs-properties -ymal file structure
 
 
 ## Below is the sample rabbitmq auto configuration.
