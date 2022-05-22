@@ -6,7 +6,7 @@ part2 include app.proprties with stucture of cloud and local hostsconfiguration
 implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
 <br/>
-reply-text=ACCESS_REFUSED - access to exchange 'amq.default' in vhost
+reply-code=403, reply-text=ACCESS_REFUSED - access to exchange 'amq.default' in vhost 'RabbitWrapperDevMain' refused for user 'blabla'
 <br/>
 https://www.rabbitmq.com/access-control.html - search ACCESS_REFUSED here
 <br/>
