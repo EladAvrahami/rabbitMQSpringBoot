@@ -3,7 +3,7 @@ Java Messaging Service (JMS) with Spring Framework. Asynchronous Messaging, Queu
 
 part2 include app.proprties with stucture of cloud and local hostsconfiguration 
 
-implementation 'org.springframework.boot:spring-boot-starter-amqp'
+*implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
 <br/>
 reply-code=403, reply-text=ACCESS_REFUSED - access to exchange 'amq.default' in vhost 'RabbitWrapperDevMain' refused for user 'blabla'
