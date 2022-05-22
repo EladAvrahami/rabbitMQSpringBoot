@@ -186,9 +186,9 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    username: TST10108AD01
-    password: Tpq2QSerkGb0Kjc
-    virtual-host: RabbitWrapperDevMain
+    username: 
+    password: 
+    virtual-host: Rabbit
 
 </pre>
 
