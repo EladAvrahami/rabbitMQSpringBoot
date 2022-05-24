@@ -16,6 +16,8 @@ https://societe-generale.github.io/rabbitmq-advanced-spring-boot-starter/#rabbit
 <br/>
 https://www.baeldung.com/spring-boot-yaml-vs-properties -ymal file structure
 
+operator+spring : https://springone.io/2021/sessions/building-an-operator-in-java
+
 
 ## Below is the sample rabbitmq auto configuration.
 <pre>
