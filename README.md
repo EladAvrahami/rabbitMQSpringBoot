@@ -20,6 +20,8 @@ operator+spring : https://springone.io/2021/sessions/building-an-operator-in-jav
 <br/>
 https://springframework.guru/spring-boot-messaging-with-rabbitmq/
 
+### also good document : https://springframework.guru/spring-boot-messaging-with-rabbitmq/
+
 
 ## Below is the sample rabbitmq auto configuration.
 <pre>
