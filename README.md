@@ -20,7 +20,8 @@ operator+spring : https://springone.io/2021/sessions/building-an-operator-in-jav
 <br/>
 https://springframework.guru/spring-boot-messaging-with-rabbitmq/
 <br/>
-How to set springBoot profiles : <a href="https://dzone.com/articles/spring-boot-profiles-1" target="_blank">Here</a>
+How to set springBoot profiles : <a href="https://dzone.com/articles/spring-boot-profiles-1" target="_blank">Here</a> or 
+<a href="https://www.javacodegeeks.com/2019/07/profiles-spring-boot-application.html#respond" target="_blank">Here2</a>
 
 ### also good document : https://springframework.guru/spring-boot-messaging-with-rabbitmq/
 
