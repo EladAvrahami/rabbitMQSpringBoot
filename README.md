@@ -19,6 +19,8 @@ https://www.baeldung.com/spring-boot-yaml-vs-properties -ymal file structure
 operator+spring : https://springone.io/2021/sessions/building-an-operator-in-java
 <br/>
 https://springframework.guru/spring-boot-messaging-with-rabbitmq/
+<br/>
+How to set springBoot profiles : https://dzone.com/articles/spring-boot-profiles-1
 
 ### also good document : https://springframework.guru/spring-boot-messaging-with-rabbitmq/
 
