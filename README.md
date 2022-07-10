@@ -25,6 +25,9 @@ How to set springBoot profiles : <a href="https://dzone.com/articles/spring-boot
 
 ### also good document : https://springframework.guru/spring-boot-messaging-with-rabbitmq/
 
+### Using RabbitMQ Messaging Topology Kubernetes Operator:
+https://www.rabbitmq.com/kubernetes/operator/using-topology-operator.html
+
 
 ## Below is the sample rabbitmq auto configuration.
 <pre>
