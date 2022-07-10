@@ -27,6 +27,8 @@ How to set springBoot profiles : <a href="https://dzone.com/articles/spring-boot
 
 ### Using RabbitMQ Messaging Topology Kubernetes Operator:
 https://www.rabbitmq.com/kubernetes/operator/using-topology-operator.html
+### Using the RabbitMQ Kubernetes Operators on Openshif
+https://www.rabbitmq.com/kubernetes/operator/using-on-openshift.html
 
 
 ## Below is the sample rabbitmq auto configuration.
