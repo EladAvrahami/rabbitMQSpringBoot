@@ -224,3 +224,189 @@ http://localhost:8080/api/v1/send-message
 
 
 
+
+
+
+## program2:
+### application.ymal :
+<pre>
+# a developer message and a stacktrace.
+# False by default.
+error-handling:
+  debug-mode: ${ERROR_HANDLING_DEBUG_MODE:false}
+  error-handling.exception-log-level: error
+header-forwarding:
+  enabled: ${HEADER_FORWARDING_ENABLED:true}
+log4j2:
+  formatMsgNoLookups: true
+logger:
+  appender: ${LOGGER_APPENDER:CONSOLE}
+  level: ${LOGGER_LEVEL:INFO}
+logging:
+  config: ${LOGBACK_LOCATION:classpath:logback-spring.xml}
+  level:
+    org:
+      apache:
+        http: ${LOGGER_LEVEL:INFO}
+      springframework: INFO
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  server:
+    port: 8080
+server:
+  max-http-header-size: ${MAX_SERVER_HEADER_SIZE:32768}
+  port: 8080
+splunk-sensitive-index-expression: ${SENSITIVE_KEY_WORD_ENV:%SENSITIVE%}
+spring:
+  application:
+    name: rabbitmq-integration
+    message: Message has been sent Successfully..
+  config:
+    import: classpath:impl/application.properties
+  sleuth:
+    sampler:
+      probability: ${SPRING_SLEUTH_SAMPLER_PROBABILITY:1.0}
+################################ Pay attention to space (to be included in the spring)
+  rabbitmq:
+    host: rabbitmq-dev-cluster-ha.rabbitmq-dev.svc.cluster.local
+    port: 5672
+    username: T #${RABBIT_USERNAME}
+    password: T #${RABBIT_PASSWORD}
+    virtual-host: RabbitWrapperDevMain
+    exchange: tester.exchange
+    queue: test.queue
+    routingkey: user.routingkey
+</pre>
+
+###nodel:
+<pre>
+
+
+@Component
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = User.class)
+public class SimpleMessage implements Serializable {
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    private String id;
+    private String firstName;
+    private String lastName;
+
+
+    @Override
+    public String toString() {
+        return "SimpleMessage{" +
+            "id='" + id + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
+    }
+}
+
+
+</pre>
+
+service folder -> ### ConsumeMessageService:
+<pre>
+
+@Service
+@EnableRabbit
+public class ConsumeMessageService {
+
+
+    @RabbitListener(queues = "${spring.rabbitmq.queue}")
+    public void consumeMessage(SimpleMessage simpleMessage) {
+        System.out.println("consumeMessage:" + simpleMessage);
+
+    }
+}
+</pre>
+
+
+service folder -> ### ProduceMessageServiceImpl:
+<pre>
+@Service
+@NoArgsConstructor
+public class ProduceMessageServiceImpl extends ProduceMessageService {
+
+
+    private RabbitTemplate rabbitTemplate;
+
+    /**
+     * autowires an rabbitTemplate object of the RabbitTemplate class.
+     * The RabbitTemplate class allows sending and receiving messages with RabbitMQ.
+     * @param rabbitTemplate
+     */
+    @Autowired
+    public ProduceMessageServiceImpl(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
+
+    @Value("${spring.rabbitmq.exchange}")
+    private String exchange;
+
+    //@Value("${spring.rabbitmq.user.routingkey}")
+    //private String routingkey;
+
+
+    public GenericResponse produceMessage(Person person) {
+        GenericResponse genericResponse = new GenericResponse();
+        try {
+            SimpleMessage simpleMessage = new SimpleMessage();
+            simpleMessage.setId(person.getId());
+            simpleMessage.setFirstName(person.getFirstName());
+            simpleMessage.setLastName(person.getLastName());
+            rabbitTemplate.convertAndSend(exchange, "", simpleMessage);
+
+
+            genericResponse.setMessage("Message was sent to queue");
+            genericResponse.setStatusCode("Success");
+        } catch (Exception e) {
+            System.out.println("Got produceMessage exception:" + e.getMessage());
+            genericResponse.setMessage(e.getMessage());
+            genericResponse.setStatusCode("Error");
+        }
+
+        return genericResponse;
+    }
+}
+
+</pre>
+
+
+
+<pre>
+
+</pre>
