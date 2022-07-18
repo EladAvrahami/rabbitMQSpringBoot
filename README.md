@@ -406,7 +406,32 @@ public class ProduceMessageServiceImpl extends ProduceMessageService {
 </pre>
 
 
-
+### controller:
 <pre>
+
+@RestController
+@RequiredArgsConstructor
+public class RabbitmqIntegrationController implements RabbitmqIntegration_v1Api {
+
+    private final ProduceMessageService produceMessageService;
+
+    @Override
+    @PostMapping("/send-message")
+    public ResponseEntity<ProduceMessageResponse> produceMessage(RequestedLanguage _lang, Person person) {
+        return ResponseEntity.status(HttpStatus.OK)
+                             .body(new ProduceMessageResponse().data(produceMessageService.produceMessage(person)));
+    }
+}
+</pre>
+
+
+###Curl
+<pre>
+curl --location --request POST 'http://localhost:8080/send-message' \
+--header 'Content-Type: application/json' \
+--data-raw '{ "id": "id1111",
+ "firstName": "elad",
+ "lastName": "avrahami"
+  }'
 
 </pre>
