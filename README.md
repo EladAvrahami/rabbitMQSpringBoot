@@ -1,3 +1,4 @@
+https://pastebin.com/Zr57SHp7
 # rabbitMQ SpringBoot
 Java Messaging Service (JMS) with Spring Framework. Asynchronous Messaging, Queue, Exchange &amp; Routing Of Messages
 
